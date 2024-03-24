@@ -7,22 +7,16 @@ from PIL import Image
 import time
 import glob
 
-
-
 from gtts import gTTS
 from googletrans import Translator
-
 
 st.title("Interfaces Multimodales")
 st.subheader("TRADUCTOR")
 
-
 image = Image.open('traductor.jpg')
-
 st.image(image)
 
-
-st.write("Toca el Botón y habla lo que quires traducir")
+st.write("Toca el Botón y habla lo que quieres traducir")
 
 stt_button = Button(label=" Inicio ", width=200)
 
@@ -66,13 +60,13 @@ if result:
     text = str(result.get("GET_TEXT"))
     in_lang = st.selectbox(
         "Selecciona el lenguaje de Entrada",
-        ("Inglés", "Español", "Bengali", "Coreano", "Mandarín", "Japonés", "Alemán","Francés"),
+        ("Inglés", "Español", "Bengalí", "Coreano", "Mandarín", "Japonés", "Alemán", "Francés"),
     )
     if in_lang == "Inglés":
         input_language = "en"
     elif in_lang == "Español":
         input_language = "es"
-    elif in_lang == "Bengali":
+    elif in_lang == "Bengalí":
         input_language = "bn"
     elif in_lang == "Coreano":
         input_language = "ko"
@@ -82,18 +76,18 @@ if result:
         input_language = "ja"
     elif in_lang == "Alemán":
         input_language = "de"
-     elif in_lang == "Francés":
+    elif in_lang == "Francés":
         input_language = "fr"
     
     out_lang = st.selectbox(
         "Selecciona el lenguaje de salida",
-        ("Inglés", "Español", "Bengali", "Coreano", "Mandarín", "Japonés"),
+        ("Inglés", "Español", "Bengalí", "Coreano", "Mandarín", "Japonés"),
     )
     if out_lang == "Inglés":
         output_language = "en"
     elif out_lang == "Español":
         output_language = "es"
-    elif out_lang == "Bengali":
+    elif out_lang == "Bengalí":
         output_language = "bn"
     elif out_lang == "Coreano":
         output_language = "ko"
@@ -101,10 +95,6 @@ if result:
         output_language = "zh-cn"
     elif out_lang == "Japonés":
         output_language = "ja"
-     elif in_lang == "Alemán":
-        input_language = "de"
-     elif in_lang == "Francés":
-        input_language = "fr"
     
     english_accent = st.selectbox(
         "Selecciona el acento",
@@ -113,7 +103,7 @@ if result:
             "Español",
             "Reino Unido",
             "Estados Unidos",
-            "Canada",
+            "Canadá",
             "Australia",
             "Irlanda",
             "Sudáfrica",
@@ -124,12 +114,11 @@ if result:
         tld = "com"
     elif english_accent == "Español":
         tld = "com.mx"
-    
     elif english_accent == "Reino Unido":
         tld = "co.uk"
     elif english_accent == "Estados Unidos":
         tld = "com"
-    elif english_accent == "Canada":
+    elif english_accent == "Canadá":
         tld = "ca"
     elif english_accent == "Australia":
         tld = "com.au"
@@ -137,7 +126,6 @@ if result:
         tld = "ie"
     elif english_accent == "Sudáfrica":
         tld = "co.za"
-    
     
     def text_to_speech(input_language, output_language, text, tld):
         translation = translator.translate(text, src=input_language, dest=output_language)
@@ -150,10 +138,9 @@ if result:
         tts.save(f"temp/{my_file_name}.mp3")
         return my_file_name, trans_text
     
-    
     display_output_text = st.checkbox("Mostrar el texto")
     
-    if st.button("convertir"):
+    if st.button("Convertir"):
         result, output_text = text_to_speech(input_language, output_language, text, tld)
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
@@ -163,7 +150,6 @@ if result:
         if display_output_text:
             st.markdown(f"## Texto de salida:")
             st.write(f" {output_text}")
-    
     
     def remove_files(n):
         mp3_files = glob.glob("temp/*mp3")
@@ -176,7 +162,4 @@ if result:
                     print("Deleted ", f)
 
     remove_files(7)
-           
-    
-
 
